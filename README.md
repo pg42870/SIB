@@ -1,4 +1,4 @@
-![CI-CD](https://github.com/pg42870/si/actions/workflows/main.yaml/badge.svg)
+![CI-CD](https://github.com/pg42870/SIB/actions/workflows/main.yaml/badge.svg)
 
 # Sistemas Inteligentes
 
