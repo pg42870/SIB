@@ -1,10 +1,10 @@
 ![CI-CD](https://github.com/pg42870/SIB/actions/workflows/main.yaml/badge.svg)
 
-# Sistemas Inteligentes
+# Sistemas Inteligentes em Bioinformática
 
 
 
-
+Repositório inicial apartir do qual se começou a fazer as alterações:
 
 `git clone https://github.com/vmspereira/si.git`
 
