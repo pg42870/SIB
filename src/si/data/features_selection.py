@@ -16,7 +16,7 @@ class VarianceThreshould:
     def transform(self, dataset, inline=False):
         X = dataset.X
         cond = self._var > self.threshold #array de booleanos
-        indxs = [i for i in range(len(cond)) if cond[i]]
+        idxs = [i for i in range(len(cond)) if cond[i]]
         X_trans = X[:,idxs]
         xnames = [dataset._xnames[i] for i in idxs]
         if inline:
@@ -25,7 +25,7 @@ class VarianceThreshould:
             return dataset
         else:
             from .dataset import Dataset
-            return Dataset(copy(X_trans),) #nao acabei esta parte
+            return Dataset(copy(X_trans), copy(dataset.Y), xnames, copy(dataset.ynames))
 
 class SelectKBest:
     def __int__(self, dataset):

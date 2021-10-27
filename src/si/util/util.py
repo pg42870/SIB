@@ -1,4 +1,5 @@
 import itertools
+import numpy as np
 
 # Y is reserved to idenfify dependent variables
 ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXZ'
@@ -32,4 +33,32 @@ def summary(dataset, format='df'):
     :param format: Output format ('df':DataFrame, 'dict':dictionary ), defaults to 'df'
     :type format: str, optional
     """
-    pass
+    if dataset.hasLabel():
+        fullds = np.hstack((dataset.X, dataset.y.reshape(len(dataset.y))))
+        columns = dataset._xnames[:]+[dataset._yname]
+    else:
+        fullds = dataset.X
+        columns = dataset._xnames[:]
+    _mean = np.mean(fullds, axis=0)
+    _vars = np.var(fullds, axis=0)
+    _maxs = np.max(fullds, axis=0)
+    _mins = np.min(fullds, axis=0)
+    stats = {}
+    for i in range(fullds.shape[1]):
+        stat = {"mean": _mean[i],
+                "vars": _vars[i],
+                "min": _mins[i],
+                "max": _maxs[i]
+                }
+        stats[columns[i]] = stat
+    if format == "df":
+        import pandas as pd
+        df = pd.DataFrame(stats)
+        return df
+    else:
+        return stats
+
+def l2_distance(x,y):
+    "distancia euclideana"
+    dist= ((x - y) ** 2).sum(axis=1)
+    return dist
