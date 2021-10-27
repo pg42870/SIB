@@ -29,6 +29,7 @@ class KMeans:
         return closest_centroids_index
 
     def transform(self,dataset):
+        """ """
         self.init_centroids(dataset)
         print(self.centroids)
         X = dataset.X
