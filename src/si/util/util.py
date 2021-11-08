@@ -65,3 +65,12 @@ def l2_distance(x,y):
     dist = np.sqrt(np.sum((x - y) ** 2, axis=1))
     return dist
 
+def train_test_split(dataset, split=0.8):
+    n = dataset.X.shape[0]
+    m = int(split*n)
+    arr = np.arrange(n)
+    np.random.shuffle(arr)
+    from ..data import Dataset #so metemos aqui para nao gastar memoria
+    train = Dataset(dataset.X[arr[:m]], dataset.Y[arr[:m]], dataset.xnames, dataset.yname)
+    test = Dataset(dataset.X[arr[m:]], dataset.Y[arr[m:]], dataset.xnames, dataset.yname)
+    return train, test
