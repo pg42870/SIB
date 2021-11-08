@@ -17,9 +17,7 @@ class PCA:
             self.values, self.vectors, vh = np.linalg.svd(scaled_feature)
         else:
             covariance_matrix = np.cov(scaled_feature.T)  # matriz da covariancia
-            self.values, self.vectors = np.linalg.eig(covariance_matrix)
-            projection_matrix = (self.vectors.T[:][:self.n_comp]).T
-            return scaled_feature.T.dot(projection_matrix)
+            self.values, self.vectors = np.linalg.eig(covariance_matrix) #tenho isto trocado, primeiro sao os vectores e depois os values
 
         self.idxs = np.argsort(self.vectors)[::-1]  #idxs das colunas ordenadas por importância de compontes
         self.eigen_val, self.eigen_vect = self.vectors[self.idxs], self.values[:,self.idxs]  # colunas dos valores e dos vetores são reordenadas pelos idxs das colunas

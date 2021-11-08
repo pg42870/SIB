@@ -52,7 +52,7 @@ class KMeans:
                 cent.append(np.mean(X[idxs == i], axis=0))
             self.centroids = np.array(cent)
             count += 1
-            changed = np.all(old_idxs == idxs) #testa se todos os argumentos sao True
+            changed = not np.all(old_idxs == idxs) #testa se todos os argumentos sao True
             old_idxs = idxs
         return self.centroids, old_idxs
 
