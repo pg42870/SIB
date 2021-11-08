@@ -34,11 +34,12 @@ def summary(dataset, format='df'):
     :type format: str, optional
     """
     if dataset.hasLabel():
-        fullds = np.hstack((dataset.X, dataset.y.reshape(len(dataset.y))))
-        columns = dataset._xnames[:]+[dataset._yname]
+        fullds = np.hstack([dataset.X, np.reshape(dataset.Y, (-1, 1))])
+        #fullds = np.hstack([dataset.X, dataset.Y.reshape(len(dataset.Y))])
+        columns = dataset.xnames[:]+[dataset.yname]
     else:
         fullds = dataset.X
-        columns = dataset._xnames[:]
+        columns = dataset.xnames[:]
     _mean = np.mean(fullds, axis=0)
     _vars = np.var(fullds, axis=0)
     _maxs = np.max(fullds, axis=0)
@@ -60,5 +61,6 @@ def summary(dataset, format='df'):
 
 def l2_distance(x,y):
     "distancia euclideana"
-    dist= ((x - y) ** 2).sum(axis=1)
+    #dist= np.sqrt(((x - y) ** 2).sum(axis=1))
+    dist = np.sqrt(np.sum((x - y) ** 2, axis=1))
     return dist
