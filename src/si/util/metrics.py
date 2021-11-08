@@ -7,3 +7,4 @@ def accuracy_score(y_true, y_predict):
             correct += 1
     accuracy = correct / len(y_true)
     return accuracy
+
