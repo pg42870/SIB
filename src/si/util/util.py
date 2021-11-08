@@ -64,3 +64,4 @@ def l2_distance(x,y):
     #dist= np.sqrt(((x - y) ** 2).sum(axis=1))
     dist = np.sqrt(np.sum((x - y) ** 2, axis=1))
     return dist
+

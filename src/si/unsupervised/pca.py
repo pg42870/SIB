@@ -3,7 +3,7 @@ from si.util.scale import StandardScaler as sc
 
 
 class PCA:
-    def __init__(self ,n_comp = 2, using="svd" ):
+    def __init__(self ,n_comp=2, using="svd"):
         self.n_comp = n_comp
         self.standardize = using
 

@@ -18,7 +18,11 @@ class KMeans:
         self._max = np.max(x, axis=0)
 
     def init_centroids(self, dataset):
-        "iniciar os centroides"
+        """
+        iniciar os centroides
+        geramos um np array onde os valores serao gerados de forma randomica de modo a terem uma distribuicao uniforme
+
+        """
         x = dataset.X
         self.centroids = np.array(
             [np.random.uniform(
@@ -40,19 +44,15 @@ class KMeans:
         X = dataset.X
         changed = True
         count = 0
-        old_idxs= np.zeros(X.shape[0])
-        print("old_idxs ",old_idxs )
+        old_idxs = np.zeros(X.shape[0])
         while changed and count < self.max_iter:
-            idxs = np.apply_along_axis(self.get_closest_centroid, axis=0, arr=X.T)
-            print("idxs" ,idxs)
+            idxs = np.apply_along_axis(self.get_closest_centroid, axis=0, arr=X.T) #aplica a funcao get_closest_centroid a todo o x
             cent = []
             for i in range(self.k):
                 cent.append(np.mean(X[idxs == i], axis=0))
             self.centroids = np.array(cent)
             count += 1
-            changed = np.all(old_idxs == idxs)
-            print(changed)
-            print(count)
+            changed = np.all(old_idxs == idxs) #testa se todos os argumentos sao True
             old_idxs = idxs
         return self.centroids, old_idxs
 
