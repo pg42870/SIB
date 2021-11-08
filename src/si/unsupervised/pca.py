@@ -31,8 +31,7 @@ class PCA:
         variance_explained = []
         for i in self.eigen_val:
             variance_explained.append((i / sum(self.eigen_val)) * 100)
-        cumulative_variance_explained = np.cumsum(variance_explained)
-        return cumulative_variance_explained
+        return variance_explained
 
     def fit_transform(self, dataset):
         return self.transform(dataset)
