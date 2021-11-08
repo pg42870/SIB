@@ -22,7 +22,7 @@ class PCA:
             return scaled_feature.T.dot(projection_matrix)
 
         self.idxs = np.argsort(self.vectors)[::-1]  #idxs das colunas ordenadas por importância de compontes
-        self.eigen_val, self.eigen_vect = self.vectors[self.idxs], self.values[:,self.idxs]  # colunas dos valores e dos vetores são reordenadas pelos indexes das colunas
+        self.eigen_val, self.eigen_vect = self.vectors[self.idxs], self.values[:,self.idxs]  # colunas dos valores e dos vetores são reordenadas pelos idxs das colunas
         self.sub_set_vect = self.eigen_vect[:, :self.n_comp]  # gera um conjunto a partir dos vetores e values ordenados
         return scaled_feature.T.dot(self.sub_set_vect)
 
@@ -30,8 +30,8 @@ class PCA:
     def variance_explained(self):
 
         variance_explained = []
-        for i in self.values:
-            variance_explained.append((i / sum(self.values)) * 100)
+        for i in self.eigen_val:
+            variance_explained.append((i / sum(self.eigen_val)) * 100)
         cumulative_variance_explained = np.cumsum(variance_explained)
         return cumulative_variance_explained
 
