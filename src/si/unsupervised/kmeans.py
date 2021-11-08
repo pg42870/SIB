@@ -38,11 +38,13 @@ class KMeans:
         self.init_centroids(dataset)
         print(self.centroids)
         X = dataset.X
-        changed = False
+        changed = True
         count = 0
         old_idxs= np.zeros(X.shape[0])
-        while not changed or count < self.max_iter:
+        print("old_idxs ",old_idxs )
+        while changed and count < self.max_iter:
             idxs = np.apply_along_axis(self.get_closest_centroid, axis=0, arr=X.T)
+            print("idxs" ,idxs)
             cent = []
             for i in range(self.k):
                 cent.append(np.mean(X[idxs == i], axis=0))
