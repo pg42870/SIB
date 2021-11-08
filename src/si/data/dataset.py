@@ -13,8 +13,8 @@ class Dataset:
             raise Exception("Trying to instanciate a DataSet without any data")
         self.X = X
         self.Y = Y
-        self._xnames = xnames if xnames else label_gen(X.shape[1])
-        self._yname = yname if yname else 'Y'
+        self.xnames = xnames if xnames else label_gen(X.shape[1])
+        self.yname = yname if yname else 'Y'
 
     @classmethod
     def from_data(cls, filename, sep=",", labeled=True):
@@ -93,10 +93,10 @@ class Dataset:
         import pandas as pd
         if self.Y is not None:
             fullds = np.hstack((self.X, self.Y.reshape(len(self.Y), 1)))
-            columns = self._xnames[:]+[self._yname]
+            columns = self.xnames[:]+[self.yname]
         else:
             fullds = self.X.copy()
-            columns = self._xnames[:]
+            columns = self.xnames[:]
         return pd.DataFrame(fullds, columns=columns)
 
     def getXy(self):
