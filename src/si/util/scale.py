@@ -52,8 +52,8 @@ class StandardScaler:
             from ..data import Dataset
             return Dataset(Z,
                            copy(dataset.Y),
-                           copy(dataset._xnames),
-                           copy(dataset._yname))
+                           copy(dataset.xnames),
+                           copy(dataset.yname))
 
     def fit_transform(self, dataset, inline=False):
         """
@@ -91,5 +91,5 @@ class StandardScaler:
             from ..data import Dataset
             return Dataset(X,
                            copy(dataset.Y),
-                           copy(dataset._xnames),
-                           copy(dataset._yname))
+                           copy(dataset.xnames),
+                           copy(dataset.yname))
