@@ -28,8 +28,7 @@ class KMeans:
             [np.random.uniform(
                 low=self._min[1], high=self._max[i], size=(self.k,)
             ) for i in range(x.shape[1])]).T
-        #rng = np.random.default_rng()
-        #self.centroids = rng.choice(copy(dataset.X), size=self.k, replace=False, p=None, axis=0)
+
 
     def get_closest_centroid(self, x):
         "retorna o id do centroide mais proximo"
@@ -37,8 +36,7 @@ class KMeans:
         closest_centroids_index = np.argmin(dist, axis=0)
         return closest_centroids_index
 
-    def transform(self,dataset):
-        """ """
+    def transform(self, dataset):
         self.init_centroids(dataset)
         print(self.centroids)
         X = dataset.X
