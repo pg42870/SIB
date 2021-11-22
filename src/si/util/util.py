@@ -74,3 +74,6 @@ def train_test_split(dataset, split=0.8):
     train = Dataset(dataset.X[arr[:m]], dataset.Y[arr[:m]], dataset.xnames, dataset.yname)
     test = Dataset(dataset.X[arr[m:]], dataset.Y[arr[m:]], dataset.xnames, dataset.yname)
     return train, test
+
+def add_intersect(X):
+    return np.hstack((np.ones((X.shape[0], 1)), X))
