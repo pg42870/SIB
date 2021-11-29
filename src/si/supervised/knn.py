@@ -2,14 +2,16 @@ from abc import ABC, abstractmethod
 from si.util.util import l2_distance
 from si.util.metrics import accuracy_score
 import numpy as np
+from .model import Model
 
-class Model(ABC):
-    def __init__(self, num_neighbors):
+class KNN(Model):
+    def __init__(self, num_neighbors, classification=True):
         """
         Abstract class definihg an interface fro supervised learning models
         """
         supper(KNN).__init__()
         self.k = num_neighbors
+        self.classification = classification
 
     def fit(self, dataset):
         self.dataset = dataset

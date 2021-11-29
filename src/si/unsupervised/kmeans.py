@@ -5,11 +5,11 @@ from copy import copy
 
 class KMeans:
 
-    def __init__(self, k: iter, n_iter=800):
+    def __init__(self, k: int, n_iter=800, distance=l2_distance) -> None:
         self.k = k
         self.max_iter = n_iter
         self.centroids = None
-        self.distance = l2_distance
+        self.distance = distance
 
     def fit(self, dataset):
         """randomly select k centroids"""

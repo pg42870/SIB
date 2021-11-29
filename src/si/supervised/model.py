@@ -16,6 +16,6 @@ class Model(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def cost(self):
+    def cost(self, *args, **karg):
         raise NotImplementedError
 
