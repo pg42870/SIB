@@ -28,7 +28,10 @@ class CrossValidationScores:
                 y_train = np.ma.apply_along_axis(self.model.predict,
                                                  axis=0,
                                                  arr = train.X.T)
-                train_scores =
+                train_scores.append(self.score(train.Y,y_train))
+                y_test = np.ma.apply_along_axis(self.model.predict,
+                                                axis=0, arr= train.X.T)
+                test_scores.append(self.score(test.Y, y_test))
         self.train_scores = train_scores
         self.test_scores = test_scores
         self.ds = ds
