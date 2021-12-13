@@ -25,7 +25,7 @@ class Dense(Layer):
         self.bias = np.zeros((1,output_size))
 
     def setWeights(self, weights, bias):
-        if (weights.shape != self.weights-shape):
+        if (weights.shape != self.weights.shape):
             raise ValueError(f"Shape mismatch {weights.shape} and {self.weights.shape}")
         if (bias.shape != self.bias.shape):
             raise ValueError(f"Shapes mismatch {bias.shape} and {self.bias}")
