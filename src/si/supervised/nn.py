@@ -2,6 +2,7 @@ import numpy as np
 
 from .model import Model
 from scipy import signal
+from abc import ABC, abstractmethod
 
 class Layer(ABC):
     def __init__(self):
