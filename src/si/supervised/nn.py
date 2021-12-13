@@ -24,7 +24,7 @@ class Dense(Layer):
         self.weights = np.random.rand(input_size, output_size) - 0.5
         self.bias = np.zeros((1,output_size))
 
-    def setWeights(self, weigths, bias):
+    def setWeights(self, weights, bias):
         if (weights.shape != self.weights-shape):
             raise ValueError(f"Shape mismatch {weights.shape} and {self.weights.shape}")
         if (bias.shape != self.bias.shape):
