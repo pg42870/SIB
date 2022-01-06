@@ -62,7 +62,7 @@ class LinearRegressionReg(LinearRegression):
         :param float lbd: lambda for the regularization'''
         super(LinearRegressionReg, self).__init__(gd=gd, epochs=epochs, lbd=lbd)
 
- def train_closed(self, X, Y):
+    def train_closed(self, X, Y):
         '''Use closed form linear algebra to fit the model.
         theta=inv(XT*X+lbd*I')*XT*y'''
         n=X.shape[1]
@@ -72,26 +72,26 @@ class LinearRegressionReg(LinearRegression):
         self.is_fitted = True
 
 
-def train_gd(self, X, Y):
-    '''Uses gradient descent to fit the model'''
-    m = X.shape[0]
-    n = X.shape[1]
-    self.history = {}
-    self.theta = np.zeros(n)
-    lbds = np.full(m, self.lbd)
-    lbds[0] = 0  # so that theta(0) is excluded from regularization form
-    for epoch in range(self.epochs):
-        grad = (X.dot(self.theta) - Y).dot(X)  # gradient by definition
-        self.theta -= (self.lr / m) * (lbds + grad)
-        self.history[epoch] = [self.theta[:], self.cost()]
+    def train_gd(self, X, Y):
+        '''Uses gradient descent to fit the model'''
+        m = X.shape[0]
+        n = X.shape[1]
+        self.history = {}
+        self.theta = np.zeros(n)
+        lbds = np.full(m, self.lbd)
+        lbds[0] = 0  # so that theta(0) is excluded from regularization form
+        for epoch in range(self.epochs):
+            grad = (X.dot(self.theta) - Y).dot(X)  # gradient by definition
+            self.theta -= (self.lr / m) * (lbds + grad)
+            self.history[epoch] = [self.theta[:], self.cost()]
 
 
-def predict(self, X):
-    assert self.is_fitted, "Model must be fit before predicting"
-    _x = np.hstack(([1], X))
-    return np.dot(self.theta, _x)
+    def predict(self, X):
+        assert self.is_fitted, "Model must be fit before predicting"
+        _x = np.hstack(([1], X))
+        return np.dot(self.theta, _x)
 
 
-def cost(self):
-    y_pred = np.dot(self.X, self.theta)
-    return mse(self.Y, y_pred) / 2
+    def cost(self):
+        y_pred = np.dot(self.X, self.theta)
+        return mse(self.Y, y_pred) / 2
