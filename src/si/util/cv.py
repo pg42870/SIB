@@ -4,7 +4,7 @@ import itertools
 
 class CrossValidationScores:
 
-    def __init__(self, model, dataset, **kwargs):
+    def __init__(self, model, dataset, score, **kwargs):
         self.model = model
         self.dataset = dataset
         self.cv = kwargs.get('cv', 3)
@@ -12,6 +12,7 @@ class CrossValidationScores:
         self.train_scores = None
         self.test_scores = None
         self.ds = None
+        self.score = score
 
     def run(self):
         train_scores = []
