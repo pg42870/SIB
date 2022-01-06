@@ -75,7 +75,7 @@ class LogisticRegressionReg:
 		self.theta = np.zeros(n)
 		for epoch in range(self.epochs):
 			z = np.dot(X, self.theta)
-			h = sigmoid(z)
+			h = Sigmoid(z)
 			grad = np.dot(X.T, (h - y)) / y.size
 			reg = (self.lbd / m) * self.theta[1:]  ###### parentesis
 			grad[1:] = grad[1:] + reg
