@@ -71,8 +71,8 @@ class LinearRegressionReg(LinearRegression):
         '''Use closed form linear algebra to fit the model.
         theta=inv(XT*X+lbd*I')*XT*y'''
         n=X.shape[1]
-        dentity = np.eye(n)
-        dentity[0,0]=0
+        identity = np.eye(n)
+        identity[0,0]=0
         self.theta = np.linalg.inv(X.T.dot(X)+self.lbd*identity).dot(X.T).dot(Y)
         self.is_fitted = True
 
