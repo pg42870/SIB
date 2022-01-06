@@ -1,6 +1,8 @@
-from .util import train_test_split
+from si.util.util import train_test_split, add_intersect
 import numpy as np
 import itertools
+
+all = ['CrossValidationScore', 'GridSearchCV']
 
 class CrossValidationScores:
 
