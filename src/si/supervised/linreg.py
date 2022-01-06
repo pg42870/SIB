@@ -60,7 +60,7 @@ class LinearRegressionReg(LinearRegression):
         :param int epochs: Number of epochs for GD
         :param int lr: Learning rate for GD
         :param float lbd: lambda for the regularization'''
-        super(LinearRegressionReg, self).__init__(gd, epochs,lr lbd)
+        super(LinearRegressionReg, self).__init__(gd, epochs,lr, lbd)
 
     def train_closed(self, X, Y):
         '''Use closed form linear algebra to fit the model.
