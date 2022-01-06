@@ -29,7 +29,7 @@ class Dense(Layer):
             raise ValueError(f"Shape mismatch {weights.shape} and {self.weights.shape}")
         if (bias.shape != self.bias.shape):
             raise ValueError(f"Shapes mismatch {bias.shape} and {self.bias}")
-        self.weights = weigths
+        self.weights = weights
         self.bias = bias
 
     def forward(self, input_data):
