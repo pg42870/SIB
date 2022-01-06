@@ -32,7 +32,7 @@ class LogisticRegression(Model):
         self.hsitory = {}
         self.theta = np.zeros(n)
         for epoch in range(self.epochs):
-            x = np.dot(X, self.theta)
+            z = np.dot(X, self.theta)
             h = sigmoid(z)
             self.theta -= self.lr * gradient
             self.history[epoch] = [self.theta[:], self.cost()]
