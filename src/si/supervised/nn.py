@@ -4,6 +4,9 @@ from .model import Model
 from scipy import signal
 from abc import ABC, abstractmethod
 
+from ..util.metrics import mse
+
+
 class Layer(ABC):
     def __init__(self):
         self.input = None
