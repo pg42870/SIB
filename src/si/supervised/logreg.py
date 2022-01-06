@@ -44,12 +44,12 @@ class LogisticRegression(Model):
 		res = 1 if p >= 0.5 else 0
 		return res
 
-	def cost(self, X=None, y=None, theta=None):
-		X = add_intersect(X) if X is not None else self.X
-		y = y if y is not None else self.Y
-		theta = theta if theta is not None else self.theta
-		y_pred = np.dot(X, theta)
-		return mse(y, y_pred) / 2
+	def cost(self):
+		#X = add_intersect(X) if X is not None else self.X
+		#y = y if y is not None else self.Y
+		#theta = theta if theta is not None else self.theta
+		y_pred = np.dot(self.X, self.theta)
+		return mse(self.Y, y_pred) / 2
 
 
 class LogisticRegressionReg:
