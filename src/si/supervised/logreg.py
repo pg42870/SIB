@@ -39,9 +39,19 @@ class LogisticRegression(Model):
 			self.theta -= self.lr * gradient
 			self.history[epoch] = [self.theta[:], self.cost()]
 
-	def predict(self, X):
-		p = self.probability(X)
-		res = 1 if p >= 0.5 else 0
+	#def predict(self, X):
+		#p = self.probability(X)
+		#res = 1 if p >= 0.5 else 0
+		#return res
+
+	def predict(self, x):
+		assert self.is_fitted, 'Model must be fit before predicting'
+		hs = np.hstack(([1], x))
+		p = sigmoid(np.dot(self.theta, hs))
+		if p >= 0.5:
+			res = 1
+		else:
+			res = 0
 		return res
 
 	def cost(self, X=None):
