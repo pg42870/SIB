@@ -175,7 +175,7 @@ class DecisionTree(Model):
         pred = np.argmax(self.predictSample(x, self.Tree))
         return pred
 
-    def cost(self, X=None, y=None):
+    def cost(self, X=None, Y=None):
         X = X if X is not None else self.dataset.X
         Y = Y if Y is not None else self.dataset.Y
 
