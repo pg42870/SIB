@@ -7,44 +7,44 @@ from ..util.util import sigmoid
 
 class LogisticRegression(Model):
 
-    def __init__(self, gd=False, epochs=1000, lr=0.001):
-        '''Linear regression Model
-        epochs: number of epochs
-        lr: learning rate for GD
-        '''
-        super(LogisticRegression, self).__init__()
-        self.theta = None
-        self.epochs = epochs
-        self.lr = lr
+	def __init__(self, gd=False, epochs=1000, lr=0.001):
+		'''Linear regression Model
+		epochs: number of epochs
+		lr: learning rate for GD
+		'''
+		super(LogisticRegression, self).__init__()
+		self.theta = None
+		self.epochs = epochs
+		self.lr = lr
 
-    def fit(self, dataset):
-        X, Y = dataset.getXy()
-        X = np.hstack(
-            (np.ones((X.shape[0], 1)), X))  # acrescentar o nosso x só com 1 que corresponde ao termo independente
-        self.X = X
-        self.Y = Y
-        # Closed form or GD
-        self.train(X, Y)  # implement closed train form (see notes)
-        self.is_fitted = True
+	def fit(self, dataset):
+		X, Y = dataset.getXy()
+		X = np.hstack(
+			(np.ones((X.shape[0], 1)), X))  # acrescentar o nosso x só com 1 que corresponde ao termo independente
+		self.X = X
+		self.Y = Y
+		# Closed form or GD
+		self.train(X, Y)  # implement closed train form (see notes)
+		self.is_fitted = True
 
-    def train(self, X, Y):
-        n = X.shape[1]
-        self.history = {}
-        self.theta = np.zeros(n)
-        for epoch in range(self.epochs):
-            z = np.dot(X, self.theta)
-            h = sigmoid(z)
+	def train(self, X, Y):
+		n = X.shape[1]
+		self.history = {}
+		self.theta = np.zeros(n)
+		for epoch in range(self.epochs):
+			z = np.dot(X, self.theta)
+			h = sigmoid(z)
 			gradient = np.dot(X.T, (h - Y)) / Y.size
 			self.theta -= self.lr * gradient
 			self.history[epoch] = [self.theta[:], self.cost()]
 
-    def predict(self, X):
-        p = self.probability(X)
-        res = 1 if p >= 0.5 else 0
-        return res
+	def predict(self, X):
+		p = self.probability(X)
+		res = 1 if p >= 0.5 else 0
+		return res
 
-    def cost(self):
-        pass
+	def cost(self):
+		pass
 
 
 class LogisticRegressionReg:
