@@ -65,7 +65,7 @@ class LogisticRegression(Model):
 
 	def cost(self, X=None, y=None, theta=None):
 		X = add_intersect(X) if X is not None else self.X
-		y = y if y is not None else self.y
+		y = y if y is not None else self.Y
 		theta = theta if theta is not None else self.theta
 		m, n = X.shape
 		h = sigmoid(np.dot(X, theta))
