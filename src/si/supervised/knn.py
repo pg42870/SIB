@@ -9,7 +9,7 @@ class KNN(Model):
         """
         Abstract class definihg an interface fro supervised learning models
         """
-        supper(KNN).__init__()
+        super(KNN).__init__()
         self.k = num_neighbors
         self.classification = classification
 
