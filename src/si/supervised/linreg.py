@@ -73,7 +73,7 @@ class LinearRegressionReg(LinearRegression):
         n=X.shape[1]
         dentity = np.eye(n)
         dentity[0,0]=0
-        self.theta = np.linalg.inv(X.T.dot(X)+self.lbd*identity).dot(x.T).dot(Y)
+        self.theta = np.linalg.inv(X.T.dot(X)+self.lbd*identity).dot(X.T).dot(Y)
         self.is_fitted = True
 
 
