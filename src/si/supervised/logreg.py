@@ -34,6 +34,7 @@ class LogisticRegression(Model):
         for epoch in range(self.epochs):
             z = np.dot(X, self.theta)
             h = sigmoid(z)
+			gradient = np.dot(X.T, (h - Y)) / Y.size
             self.theta -= self.lr * gradient
             self.history[epoch] = [self.theta[:], self.cost()]
 
@@ -58,15 +59,15 @@ class LogisticRegressionReg:
 		self.lbd = lbd  # lbd = lambda
 
 	def fit(self, dataset):
-		X, y = dataset.getXy()
+		X, Y = dataset.getXy()
 		X = add_intersect(X)
 		########
 		# Só é necessário para fazer o score (cost) caso não queiram dar os dados
 		self.X = X
-		self.Y = y
+		self.Y = Y
 		##########
 		# closed form or GD
-		self.train(X, y)
+		self.train(X, Y)
 		self.is_fitted = True
 
 	def train(self, X, y):
