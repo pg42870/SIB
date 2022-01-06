@@ -51,7 +51,7 @@ class LinearRegression(Model):
         _x = np.hstack(([1], X))
         return np.dot(self.theta, _x)
 
-class LinearRegressionReg(LinearRegression):
+class LinearRegressionReg:
 
     def __init__(self, gd=False, epochs=100, lr=0.01, lbd=1):
         '''Linear regression model with L2 regularization
