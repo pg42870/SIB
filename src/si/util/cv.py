@@ -68,16 +68,32 @@ class GridSearchCV:
             self.results.append((conf, scores))
         return self.results
 
-    def toDataframe(self):
-        import panda as pd
-        assert self.results, "The grid search needs to be ran."
-        data = dict()
-        for i, k in enumerate(self.parameters.keys()):
-            v = []
-            for r in self.results:
-                v.append(r[0][i])
-            data[k] = v
+    #def toDataframe(self):
+        #import panda as pd
+        #assert self.results, "The grid search needs to be ran."
+        #data = dict()
+        #for i, k in enumerate(self.parameters.keys()):
+            #v = []
+            #for r in self.results:
+               # v.append(r[0][i])
+            #data[k] = v
             #ate aqui temos as duas primeiras colunas criadas faltam as outras
 
 
-
+    def toDataframe(self):
+        import pandas as pd
+        #assert self.results, 'The grid search needs to be ran first'
+		data = dict()
+        for i, k in enumerate(self.parameters.keys()):
+            v = list()
+            for r in self.results:
+                v.append(r[0][i])
+            data[k] = v
+        for i in range(len(self.results[0][1][0])):
+            train, test = list(), list()
+            for res in self.results:
+                train.append(res[1][0][i])
+                test.append(res[1][1][i])
+            data['Train'+str(i+1)] = train
+            data['Test'+str(i+1)] = test
+            return pd.DataFrame(data)
