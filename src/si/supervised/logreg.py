@@ -29,14 +29,14 @@ class LogisticRegression(Model):
 
     def train(self, X, Y):
         n = X.shape[1]
-        self.hsitory = {}
+        self.history = {}
         self.theta = np.zeros(n)
         for epoch in range(self.epochs):
             z = np.dot(X, self.theta)
             h = sigmoid(z)
 			gradient = np.dot(X.T, (h - Y)) / Y.size
-            self.theta -= self.lr * gradient
-            self.history[epoch] = [self.theta[:], self.cost()]
+			self.theta -= self.lr * gradient
+			self.history[epoch] = [self.theta[:], self.cost()]
 
     def predict(self, X):
         p = self.probability(X)
