@@ -13,7 +13,7 @@ def average(values):
 class Ensemble(Model):
 
     def __init__(self, models, f_vote, score): #modelos que nao estao treinados
-        supper().__init__()
+        super().__init__()
         self.models= models
         self.fvote = f_vote
         self.score = score
@@ -32,7 +32,7 @@ class Ensemble(Model):
 
     def cost(self, X=None, y= None):
         X = X if X is not None else self.dataset.X
-        y = y if y is not None else self.dataset.y
+        y = y if y is not None else self.dataset.Y
         y_pred = np.ma.apply_along_axis(self.predict,
                                         axis=0, arr=X.T)
         return self.score(y, y_pred)
