@@ -3,7 +3,7 @@ from numpy.lib.function_base import gradient
 from .model import Model
 from ..util.metrics import mse
 import numpy as np
-
+from ..util.activation import Sigmoid
 
 class LogisticRegression(Model):
 
