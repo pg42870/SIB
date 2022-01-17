@@ -40,7 +40,7 @@ class CrossValidationScores:
             train, test = train_test_split(self.dataset, self.split)
             ds.append((train, test))
             self.model.fit(train)
-            if not self.score:
+            if self.score != None:
                 train_scores.append(self.model.cost())
                 test_scores.append(self.model.cost(test.X, test.Y))
                 pred_Y.extend(list(self.model.predict(test.X)))
