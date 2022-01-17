@@ -11,6 +11,7 @@ class CrossValidationScores:
         self.dataset = dataset
         self.cv = kwargs.get('cv', 3)
         self.split = kwargs.get('split', 0.8)
+        self.score = kwargs.get('score', None)
         self.train_scores = None
         self.test_scores = None
         self.ds = None
