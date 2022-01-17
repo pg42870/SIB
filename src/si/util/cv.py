@@ -14,7 +14,7 @@ class CrossValidationScores:
         self.train_scores = None
         self.test_scores = None
         self.ds = None
-"""
+    """
     def run(self):
         train_scores = []
         test_scores = []
@@ -29,7 +29,7 @@ class CrossValidationScores:
         self.test_scores = test_scores
         self.ds = ds
         return train_scores, test_scores
-"""
+    """
     def run(self):
         train_scores = []
         test_scores = []
