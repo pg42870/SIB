@@ -77,15 +77,25 @@ class GridSearchCV:
         self.results = None
 
     def run(self):
-        self.results = []
-        attrs = list(self.parameters.keys())
-        values = list(self.parameters.values())
-        for conf in itertools.product(*values): #produto cartesiano
-            for i in range(len(attrs)):
-                setattr(self.model, attrs[i], conf[i])
-            scores = CrossValidationScores(self.model, self.dataset, **self.kwargs).run()
-            self.results.append((conf, scores))
-        return self.results
+        train_scores = []
+        test_scores = []
+        ds = []
+        for _ in range(self.cv):
+            train, test = train_test_split(self.dataset, self.split)
+            ds.append((train, test))
+            self.model.fit(train)
+            if not self.score:
+                train_scores.append(self.model.cost())
+                test_scores.append(self.model.cost(test.X, test.Y))
+            else:
+                y_train = np.ma.apply_along_axis(self.model.predict, axis=1, arr=train.X)
+                train_scores.append(self.score(train.Y, y_train))
+                y_test = np.ma.apply_along_axis(self.model.predict, axis=1, arr=test.X)
+                test_scores.append(self.score(test.Y, y_test))
+        self.train_scores = train_scores
+        self.test_scores = test_scores
+        self.ds = ds
+        return train_scores, test_scores
 
     #def toDataframe(self):
         #import panda as pd
