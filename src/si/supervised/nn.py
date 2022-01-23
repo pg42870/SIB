@@ -132,7 +132,7 @@ class NN(Model):
 
 class Pooling2D(Layer):
 
-    def __init__(self, size, stride):
+    def __init__(self, size=2, stride=2):
         self.size = size
         self.stride = stride
 
