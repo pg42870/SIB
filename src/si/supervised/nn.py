@@ -118,12 +118,12 @@ class NN(Model):
             output = layer.forward(output)
         return output
 
-    def cost(self, X=None, y=None):
+    def cost(self, X=None, Y=None):
         assert self.is_fitted, 'Model must be fit before predict'
         X = X if X is not None else self.dataset.X
-        y = y if y is not None else self.dataset.y
+        Y = Y if Y is not None else self.dataset.Y
         output = self.predict(X)
-        return self.loss(y, output)
+        return self.loss(Y, output)
 
 
 class Pooling2D():
