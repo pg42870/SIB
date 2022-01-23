@@ -202,6 +202,16 @@ class MaxPoling(Layer):
                 yield image, i, j
 
 
+class Flatten(Layer):
+
+    def forward(self, input):
+        self.input_shape = input.shape
+        output = input.reshape(input.shape[0], -1)
+        return output
+
+    def backward(self, output_error, lr):
+        return output_error.reshape(self.input_shape)
+
 class Conv2D(Layer):
     def __init__(self, input_shape, kernel_shape, layer_depth, stride=1, padding=0):
         self.input_shape = input_shape
