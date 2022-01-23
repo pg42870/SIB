@@ -74,7 +74,7 @@ class Activation(Layer):
 
 class NN(Model):
 
-    def __init__(self, epochs = 1000, lr=0.001, verbose=True):
+    def __init__(self, epochs=1000, lr=0.001, verbose=True):
         self.epochs = epochs
         self.lr = lr
         self.verbose = verbose
@@ -83,7 +83,7 @@ class NN(Model):
         self.loss = mse
         self.loss_prime = mse_prime
 
-    def add(self,layer):
+    def add(self, layer):
         self.layers.append(layer)
 
     def fit(self, dataset):
