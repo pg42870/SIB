@@ -155,7 +155,7 @@ class Pooling2D(Layer):
 
         X_reshape = input.reshape(n * d, h, w, 1)
 
-        self.X_col = im2col(X_reshape, self.size, self.size, pad=0, stride=self.stride)
+        self.X_col = im2col(X_reshape, self.size, pad=0, stride=self.stride)
 
         out, self.max_idxs = self.pool(self.X_col)
 
