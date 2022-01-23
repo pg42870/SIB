@@ -176,11 +176,20 @@ class Pooling2D(Layer):
         return dX
 
 class MaxPooling2D(Pooling2D):
+    def pool(self, X_col):
+        out = np.amax(X_col, axis=0)
+        max_indx = np.argmax(X_col, axis=0)
+        return out, max_indx
 
-    def __init__(self, region_shape):
-        self.region_shape = region_shape
-        self.region_h, self.region_w = region_shape
+    def dpool(self, dX_col, dout_col, pool_cache):
+        for x, indx in enumerate(pool_cache):
+            dX_col[indx, x] = 1
+        return dX_col * dout_col
 
+#    def __init__(self, region_shape):
+#        self.region_shape = region_shape
+#        self.region_h, self.region_w = region_shape
+"""
     def forward(self,input_data):
         self.X_input = input_data
         _, self.input_h, self.input_w, self.input_f = input_data.shape
@@ -201,7 +210,7 @@ class MaxPooling2D(Pooling2D):
             for j in range(self.out_w):
                 image = self.X_input[(i * self.region_h): (i * self.region_h + 2), (j * self.region_h):(j * self.region_h + 2)]
                 yield image, i, j
-
+"""
 
 class Flatten(Layer):
 
