@@ -102,19 +102,7 @@ class GridSearchCV:
 
 
     def toDataframe(self):
-        import pandas as pd
-        assert self.results, 'The grid search needs to be ran first'
-        data = dict()
-        for i, k in enumerate(self.parameters.keys()):
-            v = list()
-            for r in self.results:
-                v.append(r[0][i])
-            data[k] = v
-        for i in range(len(self.results[0][1][0])):
-            train, test = list(), list()
-            for res in self.results:
-                train.append(res[1][0][i])
-                test.append(res[1][1][i])
-            data['Train'+str(i+1)] = train
-            data['Test'+str(i+1)] = test
-            return pd.DataFrame(data)
+        assert self.results, "Need to run trainning before hand"
+        n_cv = len(self.results[0][0])
+        data = np.hstack((np.array([res[0] for res in self.results]), np.array([res[1] for res in self.results])))
+        return pd.DataFrame(data=data, columns=[f"CV_{i+1} train" for i in range(n_cv)]+[f"CV_{i+1} test" for i in range(n_cv)])
