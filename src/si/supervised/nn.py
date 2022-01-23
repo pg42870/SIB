@@ -129,6 +129,9 @@ class NN(Model):
         output = self.predict(X)
         return self.loss(y, output)
 
+    def useLoss(self, func, func2):
+        self.loss, self.loss_prime = func, func2
+
 
 class Pooling2D(Layer):
 
