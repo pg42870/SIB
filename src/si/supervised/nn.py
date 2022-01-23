@@ -175,7 +175,7 @@ class Pooling2D(Layer):
 
         return dX
 
-class MaxPoling(Layer):
+class MaxPoling2D(Layer):
     def __init__(self, region_shape):
         self.region_shape = region_shape
         self.region_h, self.region_w = region_shape
