@@ -4,7 +4,7 @@ from .model import Model
 from scipy import signal
 from abc import ABC, abstractmethod
 
-from ..util.metrics import mse
+from ..util.metrics import mse, mse_prime
 
 
 class Layer(ABC):
@@ -81,7 +81,7 @@ class NN(Model):
 
         self.layers = []
         self.loss = mse
-       # self.loss_prime = mse_prime
+        self.loss_prime = mse_prime
 
     def add(self,layer):
         self.layers.append(layer)
