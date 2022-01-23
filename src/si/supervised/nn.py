@@ -155,12 +155,12 @@ class Pooling2D(Layer):
 
         X_reshape = input.reshape(n * d, h, w, 1)
 
-        self.X_col = im2col(X_reshape, self.size, pad=0, stride=self.stride)
+        self.X_col, _ = im2col(X_reshape, (self.size, self.size, 1, 1), pad=0, stride=self.stride)
 
         out, self.max_idxs = self.pool(self.X_col)
 
         out = out.reshape(h_out, w_out, n, d)
-        out = out.transpose(3, 2, 0, 1)
+        out = out.transpose(2, 0, 1, 3)
         return out
 
     def backward(self, output_error, learning_raise):
