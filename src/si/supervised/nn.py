@@ -86,7 +86,7 @@ class NN(Model):
     def add(self,layer):
         self.layers.append(layer)
 
-    def fit(self):
+    def fit(self, dataset):
         X, y = dataset.getXy()
         self.dataset = dataset
         self.history = dict()
