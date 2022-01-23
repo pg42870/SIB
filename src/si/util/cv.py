@@ -103,6 +103,7 @@ class GridSearchCV:
 
     def toDataframe(self):
         assert self.results, "Need to run trainning before hand"
+        import pandas as pd
         n_cv = len(self.results[0][0])
         data = np.hstack((np.array([res[0] for res in self.results]), np.array([res[1] for res in self.results])))
         return pd.DataFrame(data=data, columns=[f"CV_{i+1} train" for i in range(n_cv)]+[f"CV_{i+1} test" for i in range(n_cv)])
