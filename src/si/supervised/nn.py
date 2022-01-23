@@ -129,6 +129,8 @@ class NN(Model):
 class Pooling2D():
 
     def __init__(self):
+        return
+
 
     def forward(self, input):
         self.X_shape = input.shape
