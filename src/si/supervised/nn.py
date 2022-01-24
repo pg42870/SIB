@@ -154,7 +154,7 @@ class Pooling2D(Layer):
             raise Exception('Invalid output dimension')
 
         h_out, w_out = int(h_out), int(w_out)
-
+        #X_transpose = input.transpose(0, 3, 1, 2)
         X_reshape = input.reshape(n * d, h, w, 1)
 
         self.X_col, _ = im2col(X_reshape, (self.size, self.size, 1, 1), pad=0, stride=self.stride)
@@ -180,8 +180,8 @@ class Pooling2D(Layer):
 class MaxPooling2D(Pooling2D):
     def pool(self, X_col):
         out = np.amax(X_col, axis=0)
-        max_indx = np.argmax(X_col, axis=0)
-        return out, max_indx
+        max_idx = np.argmax(X_col, axis=0)
+        return out, max_idx
 
     def dpool(self, dX_col, dout_col, pool_cache):
         for x, indx in enumerate(pool_cache):
