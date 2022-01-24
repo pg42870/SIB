@@ -81,4 +81,4 @@ class ConfusionMatrix:
 
     def toDataframe(self):
         import pandas as pd
-        return pd.DtaFrame(self.build_matrix())
+        return pd.DataFrame(self.build_matrix())
