@@ -1,9 +1,10 @@
 from abc import ABC, abstractmethod
 
+
 class Model(ABC):
     def __init__(self):
         """
-        Abstract class definihg an interface fro supervised learning models
+        Abstract class defining an interface fro supervised learning models
         """
         self.is_fitted = False
 
@@ -18,4 +19,3 @@ class Model(ABC):
     @abstractmethod
     def cost(self, *args, **karg):
         raise NotImplementedError
-

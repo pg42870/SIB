@@ -1,13 +1,13 @@
-from abc import ABC, abstractmethod
-from si.util.util import l2_distance
-from si.util.metrics import accuracy_score
 import numpy as np
+from ..util.util import l2_distance
+from ..util.metrics import accuracy_score
 from .model import Model
+
 
 class KNN(Model):
     def __init__(self, num_neighbors, classification=True):
         """
-        Abstract class definihg an interface fro supervised learning models
+        Abstract class defining an interface fro supervised learning models
         """
         super(KNN).__init__()
         self.k = num_neighbors
@@ -18,18 +18,26 @@ class KNN(Model):
         self.is_fitted = True
 
     def get_neighbors(self, x):
+        """Returns the distance of the k neighbors that are closer"""
         distances = l2_distance(x, self.dataset.X)
-        sorted_index = np.argsort(distances) #ordenar as distancias
-        return sorted_index[:self.k] #devolver a distancia dos k vizinhos que estao mais proximos
+
+        # sort the distances
+        sorted_index = np.argsort(distances)
+        return sorted_index[:self.k]
 
     def predict(self, x):
         assert self.is_fitted, "Model must be fit before predict"
-        neighbors = self.get_neighbors(x) #vai buscar quais os vizinhos
-        values = self.dataset.Y[neighbors].tolist() #transforma em lista os valores do Y correspondentes aos vizinhos
-        prediction = max(set(values), key=values.count) #vai ver a lista conta as ocorrencias e devolve os valores com as ocorrencias mais altas
+
+        # gets the neighbors
+        neighbors = self.get_neighbors(x)
+
+        # transforms it in a list of y values that corresponded to the neighbors
+        values = self.dataset.Y[neighbors].tolist()
+
+        # from the list counts the occurrences and returns the values of the occurrences that have more counts
+        prediction = max(set(values), key=values.count)
         return prediction
 
     def cost(self):
         y_pred = np.ma.apply_along_axis(self.predict, axis=0, arr=self.dataset.X.T)
         return accuracy_score(self.dataset.Y, y_pred)
-

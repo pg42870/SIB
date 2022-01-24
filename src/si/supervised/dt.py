@@ -9,13 +9,17 @@ class Node:
     def __init__(self):
         self.right = None
         self.left = None
+
         # derived from splitting criteria
         self.column = None
         self.threshold = None
+
         # probability for object inside the Node to belong for each of the given classes
         self.probas = None
+
         # depth of the given node
         self.depth = None
+
         # if it is the root Node or not
         self.is_terminal = False
 
@@ -27,14 +31,14 @@ class DecisionTree(Model):
         self.max_depth = max_depth
         self.min_samples_leaf = min_samples_leaf
         self.min_samples_split = min_samples_split
+
         # Decision tree itself
         self.Tree = None
 
     def nodeProbas(self, y):
-        '''
-        Calculates probability of class in a given node
-        '''
+        """Calculates probability of class in a given node"""
         probas = []
+
         # for each unique label calculate the probability for it
         for one_class in self.classes:
             proba = y[y == one_class].shape[0] / y.shape[0]
@@ -42,17 +46,17 @@ class DecisionTree(Model):
         return np.asarray(probas)
 
     def gini(self, probas):
-        '''Calculates gini criterion'''
+        """Calculates gini criterion"""
         return 1 - np.sum(probas**2)
 
     def calcImpurity(self, y):
-        '''Wrapper for the impurity calculation. Calculates probas first and then passses them
+        """Wrapper for the impurity calculation. Calculates probas first and then passes them
         to the Gini criterion.
-        '''
+        """
         return self.gini(self.nodeProbas(y))
 
     def calcBestSplit(self, X, y):
-        '''Calculates the best possible split for the concrete node of the tree'''
+        """Calculates the best possible split for the concrete node of the tree"""
 
         bestSplitCol = None
         bestThresh = None
@@ -101,9 +105,8 @@ class DecisionTree(Model):
         return bestSplitCol, bestThresh, x_left, y_left, x_right, y_right
 
     def buildDT(self, X, y, node):
-        '''
-        Recursively builds decision tree from the top to bottom
-        '''
+        """Recursively builds decision tree from the top to bottom"""
+
         # checking for the terminal conditions
         if node.depth >= self.max_depth:
             node.is_terminal = True
@@ -139,15 +142,17 @@ class DecisionTree(Model):
         node.right.depth = node.depth + 1
         node.right.probas = self.nodeProbas(y_right)
 
-        # splitting recursevely
+        # splitting recursively
         self.buildDT(x_right, y_right, node.right)
         self.buildDT(x_left, y_left, node.left)
 
     def fit(self, dataset):
         self.dataset = dataset
         X, y = dataset.getXy()
+
         # the dataset classes
         self.classes = np.unique(y)
+
         # root node creation
         self.Tree = Node()
         self.Tree.depth = 1
@@ -156,10 +161,9 @@ class DecisionTree(Model):
         self.is_fitted = True
 
     def predictSample(self, x, node):
-        '''
-        Passes one object through decision tree and return the probability of it to belong to each class
-        '''
+        """Passes one object through decision tree and return the probability of it to belong to each class"""
         assert self.is_fitted, 'Model must be fit before predicting'
+
         # if we have reached the terminal node of the tree
         if node.is_terminal:
             return node.probas
@@ -172,6 +176,7 @@ class DecisionTree(Model):
 
     def predict(self, x):
         assert self.is_fitted, 'Model must be fit before predicting'
+
         pred = np.argmax(self.predictSample(x, self.Tree))
         return pred
 
