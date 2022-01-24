@@ -41,8 +41,8 @@ class Dense(Layer):
 
     def forward(self, input_data):
         self.input = input_data
-        print(self.input.shape)
-        print(self.weights.shape)
+        print("in",self.input.shape)
+        print("w",self.weights.shape)
         self.output = np.dot(self.input, self.weights) + self.bias
         return self.output
 
