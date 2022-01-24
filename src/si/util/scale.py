@@ -11,6 +11,7 @@ class StandardScaler:
     Standardizing data is often necessary before training many machine
     learning models to avoid problems like exploding/vanishing gradients and
     feature dominance.
+
     Attributes
     ----------
     _mean : numpy array of shape (n_features, )
@@ -23,6 +24,7 @@ class StandardScaler:
         """
         Calculate and store the mean and variance of each feature in the
         training set.
+
         Parameters
         ----------
         dataset : A Dataset object to be standardized
@@ -35,6 +37,7 @@ class StandardScaler:
         """
         Standardize data by subtracting out the mean and dividing by
         standard deviation calculated during fitting.
+
         Parameters
         ----------
         dataset : A Dataset object to be standardized
@@ -59,6 +62,7 @@ class StandardScaler:
         """
         Calculate and store the mean and variance of each feature and
         standardize the data.
+
         Parameters
         ----------
         dataset : A Dataset object to be standardized
@@ -76,6 +80,7 @@ class StandardScaler:
         Inverse standard scaler:
             x = z * s + u
         where s is the standard deviation, and u is the mean.
+
         Parameters
         ----------
         dataset : A standardized Dataset object
