@@ -41,8 +41,6 @@ class Dense(Layer):
 
     def forward(self, input_data):
         self.input = input_data
-        print("in", self.input.shape)
-        print("w", self.weights.shape)
         self.output = np.dot(self.input, self.weights) + self.bias
         return self.output
 
@@ -96,7 +94,6 @@ class NN(Model):
             output = X
             #forward propagation
             for layer in self.layers:
-                print("output", output.shape)
                 output = layer.forward(output)
 
             #backwward propagation
