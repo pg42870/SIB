@@ -154,7 +154,6 @@ class Pooling2D(Layer):
             raise Exception('Invalid output dimension')
 
         h_out, w_out = int(h_out), int(w_out)
-        #X_transpose = input.transpose(0, 3, 1, 2)
         X_reshape = input.reshape(n * d, h, w, 1)
 
         self.X_col, _ = im2col(X_reshape, (self.size, self.size, 1, 1), pad=0, stride=self.stride)
@@ -172,7 +171,7 @@ class Pooling2D(Layer):
         dout_col = output_error.transpose(1, 2, 3, 0).ravel()
 
         dX = self.dpool(dX_col, dout_col, self.max_idx)
-        dX = col2im(dX, (n * d, h, w, 1), self.size, self.size, padding=0, stride=self.stride)
+        dX = col2im(dX, (n * d, h, w, 1), self.size, self.size, pad=0, stride=self.stride)
         dX = dX.reshape(self.X_shape)
 
         return dX
