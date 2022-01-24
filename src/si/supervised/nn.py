@@ -171,7 +171,7 @@ class Pooling2D(Layer):
         dout_col = output_error.transpose(1, 2, 3, 0).ravel()
 
         dX = self.dpool(dX_col, dout_col, self.max_idx)
-        dX = col2im(dX, (n * d, h, w, 1), self.size, pad=0, stride=self.stride)
+        dX = col2im(dX, (n * d, h, w, 1), (self.size, self.size, d, d), pad=0, stride=self.stride)
         dX = dX.reshape(self.X_shape)
 
         return dX
