@@ -134,7 +134,7 @@ class NN(Model):
 
 class Pooling2D(Layer):
 
-    def __init__(self, size=2, stride=2):
+    def __init__(self, size=2, stride=1):
         self.size = size
         self.stride = stride
 
@@ -272,7 +272,7 @@ class Conv2D(Layer):
         self.weights -= learning_rate * dW
         self.bias -= learning_rate * db
         return input_error
-
+"""
     def predict(self, input_data):
         assert self.is_fitted, 'Model must be fit before predicting'
         output = input_data
@@ -286,3 +286,4 @@ class Conv2D(Layer):
         y = y if y is not None else self.dataset.y
         output = self.predict(X)
         return self.loss(y, output)
+"""
