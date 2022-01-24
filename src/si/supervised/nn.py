@@ -95,6 +95,8 @@ class NN(Model):
             for layer in self.layers:
                 output = layer.forward(output)
 
+            print(y.shape)
+
             # backward propagation
             error = self.loss_prime(y, output)
             for layer in reversed(self.layers):
