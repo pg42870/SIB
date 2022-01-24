@@ -98,6 +98,7 @@ class NN(Model):
         self.history = dict()
         for epoch in range(self.epochs):
             output = X
+            print("output",output)
             #forward propagation
             for layer in self.layers:
                 print(layer)
