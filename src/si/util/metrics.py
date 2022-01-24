@@ -62,3 +62,23 @@ def r2_score(y_true, y_pred):
     # R^2.
     score = 1 - numerator / denominator
     return score
+
+
+class ConfusionMatrix:
+
+    def __init__(self, true_y, predict_y):
+        """Confusion Matrix implementation for the
+        evaluation of the performance model by comparing the true vs the predicted values."""
+        self.true_y = np.array(true_y)
+        self.predict_y = np.array(predict_y)
+        self.conf_matrix = None
+
+    def build_matrix(self):
+        # computing a cross tabulation - frequency table of the factors
+        import pandas as pd
+        self.conf_matrix = pd.crosstab(self.true_y, self.predict_y, rownames=["True values"],
+                                       colnames=["Predicted values"])
+
+    def toDataframe(self):
+        import pandas as pd
+        return pd.DtaFrame(self.build_matrix())
