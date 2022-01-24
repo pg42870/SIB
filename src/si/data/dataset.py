@@ -10,7 +10,7 @@ class Dataset:
                  yname: str = None):
         """ Tabular Dataset"""
         if X is None:
-            raise Exception("Trying to instanciate a DataSet without any data")
+            raise Exception("Trying to instantiate a DataSet without any data")
         self.X = X
         self.Y = Y
         self.xnames = xnames if xnames else label_gen(X.shape[1])
@@ -24,6 +24,7 @@ class Dataset:
         :type filename: str
         :param sep: attributes separator, defaults to ","
         :type sep: str, optional
+        :param labeled: ,default to True
         :return: A DataSet object
         :rtype: DataSet
         """
@@ -40,12 +41,12 @@ class Dataset:
     def from_dataframe(cls, df, ylabel=None):
         """Creates a DataSet from a pandas dataframe.
 
-        :param df: [description]
-        :type df: [type]
-        :param ylabel: [description], defaults to None
+        :param df: dataframe
+        :type df: pandas dataframe
+        :param ylabel: label of the column y of df, defaults to None
         :type ylabel: [type], optional
-        :return: [description]
-        :rtype: [type]
+        :return: the Dataset obj
+        :rtype: Dataset
         """
 
         if ylabel and ylabel in df.columns:
@@ -66,7 +67,7 @@ class Dataset:
         return self.X.shape[0]
 
     def hasLabel(self):
-        """Returns True if the dataset constains labels (a dependent variable)"""
+        """Returns True if the dataset constrains labels (a dependent variable)"""
         return self.Y is not None
 
     def getNumFeatures(self):
@@ -100,4 +101,5 @@ class Dataset:
         return pd.DataFrame(fullds, columns=columns)
 
     def getXy(self):
+        """Returns the X and Y of the Dataset"""
         return self.X, self.Y

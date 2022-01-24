@@ -1,5 +1,6 @@
 import numpy as np
 from copy import copy
+
 import warnings
 from scipy import stats
 from scipy.stats import f
@@ -15,7 +16,7 @@ class VarianceThreshold:
         self.threshold = threshold
 
     def fit(self, dataset):
-        #recebe o dataset e guarda numa variavel as variancias dos X
+        """Recebe o dataset e guarda numa variavel as variancias dos X"""
         X = dataset.X
         self._var= np.var(X, axis=0)
 
@@ -39,7 +40,7 @@ class VarianceThreshold:
 
 
 def f_regression(dataset):
-    # calcula o coeficiente de correlacao com dois graus de liberdade
+    """ calcula o coeficiente de correlacao com dois graus de liberdade"""
     X = dataset.X
     Y = dataset.Y
     corr_coef = np.array([stats.pearsonr(X[:,i],Y)[0] for i in range(X.shape[1])])
@@ -51,7 +52,7 @@ def f_regression(dataset):
 
 
 def f_classification(dataset):
-    # devolve quais as features que contribuem mais para que tenham a mesma media
+    """devolve quais as features que contribuem mais para que tenham a mesma media"""
     X = dataset.X
     y = dataset.Y
 
@@ -63,7 +64,7 @@ def f_classification(dataset):
 
 class SelectKBest:
     """
-    Escolhe as melhores features
+    Select the best features
     """
     def __init__(self, k: int, score_funcs):
         if score_funcs in (f_classification, f_regression):
@@ -74,7 +75,7 @@ class SelectKBest:
         else:
             warnings.warn("Invalid feature number, k must be greater than 0")
 
-    def fit(self,dataset):
+    def fit(self, dataset):
         self.F, self.p = self._func(dataset)
 
     def transform(self, dataset, inline=False):
