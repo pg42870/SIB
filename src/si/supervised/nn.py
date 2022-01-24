@@ -99,6 +99,7 @@ class NN(Model):
             #forward propagation
             for layer in self.layers:
                 print(layer)
+                print(self.output)
                 output = layer.forward(output)
 
             #backwward propagation
