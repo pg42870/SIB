@@ -71,7 +71,7 @@ class ConfusionMatrix:
         evaluation of the performance model by comparing the true vs the predicted values."""
         self.true_y = np.array(true_y)
         self.predict_y = np.array(predict_y)
-        return self.to_df()
+
 
     def build_matrix(self):
         # computing a cross tabulation - frequency table of the factors
