@@ -89,7 +89,6 @@ class NN(Model):
 
     def add(self, layer):
         self.layers.append(layer)
-        print(self.layers)
 
     def fit(self, dataset):
         X, y = dataset.getXy()
@@ -99,6 +98,7 @@ class NN(Model):
             output = X
             #forward propagation
             for layer in self.layers:
+                print(layer.shape)
                 output = layer.forward(output)
 
             #backwward propagation
