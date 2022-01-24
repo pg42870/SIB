@@ -29,6 +29,7 @@ class Dense(Layer):
     def __init__(self, input_size, output_size):
         """Fully connect layer"""
         self.weights = np.random.rand(input_size, output_size) - 0.5
+        print("ini",self.weights.shape)
         self.bias = np.zeros((1, output_size))
 
     def setWeights(self, weights, bias):
